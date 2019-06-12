@@ -12,6 +12,16 @@ To create this, you will need to use variables, arrays, functions, event listene
 
 **Hint:** Don't worry about using OOP, unless you really want to!
 
+## Step 1: Clone Repe
+* Click "clone or download" on this repo
+* Click the clipboard to copy the git url
+* Open your terminal, `cd` to your coding folder
+* put this in the terminal to clone: `git clone ` + the git url
+* in terminal: `cd simon game`
+* `subl .`
+
+## Step 2: Write JS code
+
 ## User Stories:
 
 * I am presented with a random button press, which I will then copy.
