@@ -1,5 +1,7 @@
 # Build a Simon Game
 
+![](https://cf.geekdo-images.com/imagepage/img/sFzCdqY5SFq9044UZ9_PpvtIp1g=/fit-in/900x600/filters:no_upscale()/pic288369.jpg)
+
 ## Objective
 
 Build an app that is functionally similar to this: https://ajibs.github.io/simon-game/
