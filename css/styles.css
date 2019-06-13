@@ -33,25 +33,25 @@ h3 {
 .red {
 	top: 0;
 	left: 0;
-	border: 10px solid #f22613;
+	border: 10px solid red;
 }
 
 .blue {
 	top: 0;
 	right: 0;
-	border: 10px solid #2980b9;
+	border: 10px solid blue;
 }
 
 .yellow {
 	bottom: 0;
 	right: 0;
-	border: 10px solid #f1c40f;
+	border: 10px solid yellow;
 }
 
 .green {
 	bottom: 0;
 	left: 0;
-	border: 10px solid #2ecc71;
+	border: 10px solid green;
 }
 
 
