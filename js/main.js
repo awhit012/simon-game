@@ -5,36 +5,12 @@
  * when strict mode is active, the game restarts on user's wrong button press
  */
 
-// Once you have the game set up, you can optionally add these sounds:
-var audio = {
+const audio = {
 	red: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"), 
 	blue: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"), 
 	yellow: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"), 
 	green: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
 };
-
-
-// USER STORY: When I Click start, a square becomes solid color for a moment:
-// start clicked -> random square becomes solid
-// same square clicked -> end of round one
-
-// USER STORY: When the user gets a round correct, the game repeats the previous pattern, with one more square added.
-// issue: we want to check that a user has gotten each click correct as we go, not wait to the end.
-
-// Pseudo code:
-// on click from user
-//    check if the button clicked is the correct one in the array
-//    if button clicked isn't correct
-//		show "try again"
-//      end game
-//	  if button clicked IS correct
-//       continue checking until all clicks have been checked
-//    	 when we have checked all clicks and they are all correct 
-//         if rounds = 9
-//            show "you win!"
-//         else go to next round
-
-
 
 const computerPickedColors = [];
 let userClicks = 0;
@@ -89,30 +65,52 @@ const resetGame = () => {
 	countSpan.innerHTML = round;
 }
 
-const checkIfUserInputIsCorrect = (event) => {
-	userClicks++;
-	if (event.target.id === computerPickedColors[userClicks -1]) {
-		console.log("correct")
+const endRound = () => {
+	round++;
+	countSpan.innerHTML = round;
+	if(round === 9) {
+		alert("YOU WIN!")
+		resetGame()
 	} else {
-		if(computerPickedColors.length === 0) {
-			return;
-		}
+		setTimeout( pickRandomSquare, 1000)
+	}
+}
+
+const isUserInputCorrect = (event) => {
+	return event.target.id === computerPickedColors[userClicks -1]
+}
+
+const isInFreeMode = () => {
+	return computerPickedColors.length === 0
+}
+
+const isRoundOver = () => {
+	return userClicks === computerPickedColors.length
+}
+
+const handleIncorrectUserInput = () => {
+	if(isInFreeMode) {
+		return;
+	} else {
 		alert("try again!")
 		resetGame()
 	}
+}
 
-	if (userClicks === computerPickedColors.length) {
-		console.log("end of round")
-		round++;
-		countSpan.innerHTML = round;
-		if(round === 9) {
-			alert("YOU WIN!")
-			resetGame()
-		} else {
-			setTimeout( pickRandomSquare, 1000)
-		}
+const handleUserClick = (event) => {
+	userClicks++;
+	audio[event.target.id].play();
+	makeSquareSolid(event.target.id)
+
+	if(!isUserInputCorrect(event)) {
+		handleIncorrectUserInput()
+	}
+	if (isRoundOver()) {
+		endRound();
 	}
 }
+
+
 
 startButton.addEventListener("click", () => {
 	resetGame()
@@ -123,9 +121,7 @@ const tiles = document.querySelectorAll('.tile');
 
 tiles.forEach( (tile) => {
 	tile.addEventListener("click", (event) => {
-		audio[event.target.id].play();
-		makeSquareSolid(event.target.id)
-		checkIfUserInputIsCorrect(event)
+		handleUserClick(event)
 	});
 })
 
