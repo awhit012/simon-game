@@ -1,4 +1,4 @@
-/**
+/** 
  * This is a game where the computer plays first,
  * then the user follows the sequence,
  * if user is wrong, the computer plays the sequence again
